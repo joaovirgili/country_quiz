@@ -17,7 +17,10 @@ class HomeModule extends ChildModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (_, args) => HomePage()),
-        ModularRouter(AppRoutes.quiz, child: (_, args) => QuizPage()),
+        ModularRouter(AppRoutes.quiz,
+            child: (_, args) => QuizPage(
+                  quizType: args.data as String,
+                )),
       ];
 
   static Inject get to => Inject<HomeModule>.of();

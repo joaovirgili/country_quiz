@@ -3,8 +3,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'quiz_controller.dart';
 
 class QuizPage extends StatefulWidget {
-  final String title;
-  const QuizPage({Key key, this.title = "Quiz"}) : super(key: key);
+  final String quizType;
+
+  const QuizPage({
+    @required this.quizType,
+    Key key,
+  }) : super(key: key);
 
   @override
   _QuizPageState createState() => _QuizPageState();
@@ -17,7 +21,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.quizType),
       ),
       body: Column(
         children: <Widget>[],

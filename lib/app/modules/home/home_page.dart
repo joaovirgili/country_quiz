@@ -35,13 +35,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               children: [
                 RaisedButton(
                   onPressed: () {
-                    Modular.to.pushNamed(AppRoutes.quiz);
+                    Modular.to.pushNamed(
+                      AppRoutes.quiz,
+                      arguments: "capital",
+                    );
                   },
                   child: Text("Capital"),
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Modular.to.pushNamed(AppRoutes.quiz);
+                    Modular.to.pushNamed(AppRoutes.quiz, arguments: "bandeira");
                   },
                   child: Text("Bandeira"),
                 ),
