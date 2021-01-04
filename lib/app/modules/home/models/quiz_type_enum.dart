@@ -1,0 +1,1 @@
+enum QuizType { capital, bandeira }

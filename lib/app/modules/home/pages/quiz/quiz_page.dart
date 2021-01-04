@@ -1,9 +1,10 @@
+import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'quiz_controller.dart';
 
 class QuizPage extends StatefulWidget {
-  final String quizType;
+  final QuizType quizType;
 
   const QuizPage({
     @required this.quizType,
@@ -21,7 +22,8 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.quizType),
+        title:
+            Text(widget.quizType == QuizType.bandeira ? "bandeira" : "capital"),
       ),
       body: Column(
         children: <Widget>[],

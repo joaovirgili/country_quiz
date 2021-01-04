@@ -1,3 +1,4 @@
+import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/app/modules/home/pages/quiz/quiz_page.dart';
 import 'package:country_quiz/shared/routes.dart';
 
@@ -19,7 +20,7 @@ class HomeModule extends ChildModule {
         ModularRouter(Modular.initialRoute, child: (_, args) => HomePage()),
         ModularRouter(AppRoutes.quiz,
             child: (_, args) => QuizPage(
-                  quizType: args.data as String,
+                  quizType: args.data as QuizType,
                 )),
       ];
 

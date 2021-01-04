@@ -3,6 +3,7 @@ import 'package:country_quiz/shared/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'home_controller.dart';
+import 'models/quiz_type_enum.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,14 +38,17 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   onPressed: () {
                     Modular.to.pushNamed(
                       AppRoutes.quiz,
-                      arguments: "capital",
+                      arguments: QuizType.capital,
                     );
                   },
                   child: Text("Capital"),
                 ),
                 RaisedButton(
                   onPressed: () {
-                    Modular.to.pushNamed(AppRoutes.quiz, arguments: "bandeira");
+                    Modular.to.pushNamed(
+                      AppRoutes.quiz,
+                      arguments: QuizType.bandeira,
+                    );
                   },
                   child: Text("Bandeira"),
                 ),
