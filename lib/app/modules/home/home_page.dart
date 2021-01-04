@@ -1,3 +1,5 @@
+import 'package:country_quiz/shared/assets.dart';
+import 'package:country_quiz/shared/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'home_controller.dart';
@@ -19,11 +21,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       body: Stack(
         children: [
           LayoutBuilder(builder: (context, constraints) {
-            print(constraints.maxHeight);
             return SizedBox(
-              height: 591,
+              height: constraints.maxHeight,
               child: Image.asset(
-                "assets/img/background.png",
+                AppAssets.background,
                 fit: BoxFit.cover,
               ),
             );
@@ -33,11 +34,15 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed(AppRoutes.quiz);
+                  },
                   child: Text("Capital"),
                 ),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Modular.to.pushNamed(AppRoutes.quiz);
+                  },
                   child: Text("Bandeira"),
                 ),
               ],
