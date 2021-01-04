@@ -16,20 +16,34 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       appBar: AppBar(
         title: Text("Países Quiz App"),
       ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            RaisedButton(
-              onPressed: () {},
-              child: Text("Capital"),
+      body: Stack(
+        children: [
+          LayoutBuilder(builder: (context, constraints) {
+            print(constraints.maxHeight);
+            return SizedBox(
+              height: 591,
+              child: Image.asset(
+                "assets/img/background.png",
+                fit: BoxFit.cover,
+              ),
+            );
+          }),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text("Capital"),
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text("Bandeira"),
+                ),
+              ],
             ),
-            RaisedButton(
-              onPressed: () {},
-              child: Text("Bandeira"),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
