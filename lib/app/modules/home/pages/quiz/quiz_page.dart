@@ -1,6 +1,9 @@
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
+import 'package:country_quiz/shared/assets.dart';
+import 'package:country_quiz/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'components/question_widget.dart';
 import 'quiz_controller.dart';
 
 class QuizPage extends StatefulWidget {
@@ -16,17 +19,27 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends ModularState<QuizPage, QuizController> {
-  //use 'controller' variable to access controller
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:
-            Text(widget.quizType == QuizType.bandeira ? "bandeira" : "capital"),
-      ),
-      body: Column(
-        children: <Widget>[],
+      body: Stack(
+        children: <Widget>[
+          LayoutBuilder(builder: (context, constraints) {
+            return SizedBox(
+              height: constraints.maxHeight,
+              child: Image.asset(
+                AppAssets.background,
+                fit: BoxFit.cover,
+              ),
+            );
+          }),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: QuestionWidget(),
+            ),
+          )
+        ],
       ),
     );
   }
