@@ -1,8 +1,8 @@
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/shared/assets.dart';
-import 'package:country_quiz/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
 import 'components/question_widget.dart';
 import 'quiz_controller.dart';
 
@@ -33,21 +33,36 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "COUNTRY QUIZ",
-                    style: TextStyle(
-                      color: Color(0xffF2F2F2),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 26,
+              child: Container(
+                height: 500,
+                child: Stack(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 35),
+                        Text(
+                          "COUNTRY QUIZ",
+                          style: TextStyle(
+                            color: Color(0xffF2F2F2),
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        QuestionWidget(),
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  QuestionWidget(),
-                ],
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: SvgPicture.asset(
+                        AppAssets.question,
+                        height: 100,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )
