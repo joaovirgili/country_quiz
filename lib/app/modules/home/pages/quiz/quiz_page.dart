@@ -27,16 +27,28 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
           LayoutBuilder(builder: (context, constraints) {
             return SizedBox(
               height: constraints.maxHeight,
-              child: Image.asset(
-                AppAssets.background,
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset(AppAssets.background, fit: BoxFit.cover),
             );
           }),
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: QuestionWidget(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "COUNTRY QUIZ",
+                    style: TextStyle(
+                      color: Color(0xffF2F2F2),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 26,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  QuestionWidget(),
+                ],
+              ),
             ),
           )
         ],
