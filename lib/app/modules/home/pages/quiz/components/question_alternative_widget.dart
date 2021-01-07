@@ -29,10 +29,7 @@ class QuestionAlternative extends StatelessWidget {
                 ? AppColors.green
                 : AppColors.red,
         border: type == null
-            ? Border.all(
-                color: AppColors.purple.withOpacity(0.7),
-                width: 2,
-              )
+            ? Border.all(color: AppColors.purple.withOpacity(0.7), width: 2)
             : null,
         borderRadius: BorderRadius.circular(12),
       ),
@@ -42,10 +39,7 @@ class QuestionAlternative extends StatelessWidget {
           children: [
             Text(letter, style: style),
             SizedBox(width: 30),
-            Text(
-              label,
-              style: style.copyWith(fontSize: 14),
-            ),
+            Text(label, style: style.copyWith(fontSize: 14)),
             Spacer(),
             if (type != null)
               Icon(
