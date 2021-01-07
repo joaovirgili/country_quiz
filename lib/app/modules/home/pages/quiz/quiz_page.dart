@@ -51,7 +51,31 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                           ),
                         ),
                         SizedBox(height: 5),
-                        QuestionWidget(),
+                        QuestionWidget(
+                          statement: "Kuala Lumpur is the capital of",
+                          alternatives: [
+                            QuestionAlternativeModel(
+                              label: "Vietnam",
+                              type: false,
+                              letter: "A",
+                            ),
+                            QuestionAlternativeModel(
+                              label: "Malaysia",
+                              type: true,
+                              letter: "B",
+                            ),
+                            QuestionAlternativeModel(
+                              label: "Sweden",
+                              type: null,
+                              letter: "C",
+                            ),
+                            QuestionAlternativeModel(
+                              label: "Austria",
+                              type: null,
+                              letter: "D",
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                     Align(

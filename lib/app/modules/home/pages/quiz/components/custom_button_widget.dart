@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key key,
+    this.onTap,
   }) : super(key: key);
+
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           highlightColor: Colors.white.withOpacity(0.1),
           splashColor: Colors.white.withOpacity(0.3),
-          onTap: () {},
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
             child: Text(

@@ -3,10 +3,29 @@ import 'package:flutter/material.dart';
 import 'custom_button_widget.dart';
 import 'question_alternative_widget.dart';
 
+class QuestionAlternativeModel {
+  final String letter;
+  final String label;
+  final bool type;
+
+  QuestionAlternativeModel({
+    @required this.letter,
+    @required this.label,
+    this.type,
+  });
+}
+
 class QuestionWidget extends StatelessWidget {
   const QuestionWidget({
     Key key,
+    @required this.alternatives,
+    @required this.statement,
+    this.onTapNext,
   }) : super(key: key);
+
+  final List<QuestionAlternativeModel> alternatives;
+  final Function onTapNext;
+  final String statement;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +44,7 @@ class QuestionWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Kuala Lumpur is the capital of",
+                statement,
                 style: TextStyle(
                   color: Color(0xff2F527B),
                   fontWeight: FontWeight.w700,
@@ -34,23 +53,19 @@ class QuestionWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24),
-            QuestionAlternative(
-              letter: "A",
-              label: "Vietnam",
-              type: false,
-            ),
-            SizedBox(height: 18),
-            QuestionAlternative(
-              letter: "B",
-              label: "Malaysia",
-              type: true,
-            ),
-            SizedBox(height: 18),
-            QuestionAlternative(letter: "C", label: "Sweden"),
-            SizedBox(height: 18),
-            QuestionAlternative(letter: "D", label: "Austria"),
-            SizedBox(height: 18),
-            CustomButton(),
+            ...alternatives
+                .map((e) => Column(
+                      children: [
+                        QuestionAlternative(
+                          letter: e.letter,
+                          label: e.label,
+                          type: e.type,
+                        ),
+                        SizedBox(height: 18),
+                      ],
+                    ))
+                .toList(),
+            CustomButton(onTap: onTapNext),
           ],
         ),
       ),
