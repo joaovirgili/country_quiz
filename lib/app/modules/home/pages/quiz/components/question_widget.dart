@@ -45,17 +45,18 @@ class QuestionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(height: 48),
-            Align(
-              alignment: Alignment.topLeft,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: SvgPicture.network(
-                  "https://restcountries.eu/data/alb.svg",
-                  height: 55,
-                  width: 85,
+            if (flagUrl != null)
+              Align(
+                alignment: Alignment.topLeft,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: SvgPicture.network(
+                    "https://restcountries.eu/data/alb.svg",
+                    height: 55,
+                    width: 85,
+                  ),
                 ),
               ),
-            ),
             SizedBox(height: 24),
             Align(
               alignment: Alignment.centerLeft,

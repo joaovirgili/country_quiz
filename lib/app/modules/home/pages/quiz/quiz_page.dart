@@ -34,7 +34,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Container(
-                height: 550,
+                height: widget.quizType == QuizType.bandeira ? 600 : 500,
                 child: Stack(
                   children: [
                     Column(
@@ -51,6 +51,9 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                         ),
                         SizedBox(height: 5),
                         QuestionWidget(
+                          flagUrl: widget.quizType == QuizType.bandeira
+                              ? "https://restcountries.eu/data/alb.svg"
+                              : null,
                           statement: "Kuala Lumpur is the capital of",
                           alternatives: [
                             QuestionAlternativeModel(
