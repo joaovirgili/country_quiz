@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'custom_button_widget.dart';
 import 'question_alternative_widget.dart';
@@ -21,11 +22,13 @@ class QuestionWidget extends StatelessWidget {
     @required this.alternatives,
     @required this.statement,
     this.onTapNext,
+    this.flagUrl,
   }) : super(key: key);
 
   final List<QuestionAlternativeModel> alternatives;
   final Function onTapNext;
   final String statement;
+  final String flagUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +39,30 @@ class QuestionWidget extends StatelessWidget {
       ),
       width: double.maxFinite,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(18.0, 48, 18, 24),
+        padding: const EdgeInsets.fromLTRB(18.0, 0, 18, 24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
+            SizedBox(height: 48),
+            Align(
+              alignment: Alignment.topLeft,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: SvgPicture.network(
+                  "https://restcountries.eu/data/alb.svg",
+                  height: 55,
+                  width: 85,
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                statement,
+                flagUrl == null
+                    ? statement
+                    : "Which country does this flag belong to?",
                 style: TextStyle(
                   color: Color(0xff2F527B),
                   fontWeight: FontWeight.w700,

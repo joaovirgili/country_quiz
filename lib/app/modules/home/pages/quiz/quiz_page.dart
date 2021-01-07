@@ -34,12 +34,11 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Container(
-                height: 500,
+                height: 550,
                 child: Stack(
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(height: 35),
                         Text(
