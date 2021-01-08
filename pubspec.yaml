@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  equatable: ^1.2.5
   rx_notifier: ^0.0.7
   flutter_svg: ^0.19.2+1
   dio: ^3.0.10

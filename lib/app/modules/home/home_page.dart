@@ -13,6 +13,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends ModularState<HomePage, HomeController> {
   //use 'controller' variable to access controller
 
+  void _onPressedCapital() {
+    Modular.to.pushNamed(
+      AppRoutes.quiz,
+      arguments: QuizType.capital,
+    );
+  }
+
+  void _onPressedBandeira() {
+    controller.buildBandeiraQuestions();
+    Modular.to.pushNamed(
+      AppRoutes.quiz,
+      arguments: QuizType.bandeira,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,25 +53,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       RaisedButton(
-                        onPressed: value
-                            ? null
-                            : () {
-                                Modular.to.pushNamed(
-                                  AppRoutes.quiz,
-                                  arguments: QuizType.capital,
-                                );
-                              },
+                        onPressed: value ? null : _onPressedCapital,
                         child: Text("Capital"),
                       ),
                       RaisedButton(
-                        onPressed: value
-                            ? null
-                            : () {
-                                Modular.to.pushNamed(
-                                  AppRoutes.quiz,
-                                  arguments: QuizType.bandeira,
-                                );
-                              },
+                        onPressed: value ? null : _onPressedBandeira,
                         child: Text("Bandeira"),
                       ),
                     ],
