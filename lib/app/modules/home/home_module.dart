@@ -5,6 +5,7 @@ import 'package:country_quiz/app/modules/home/pages/quiz/quiz_page.dart';
 import 'package:country_quiz/shared/routes.dart';
 import 'package:dio/dio.dart';
 
+import 'models/question.dart';
 import 'pages/quiz/quiz_controller.dart';
 import 'home_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,7 +29,8 @@ class HomeModule extends ChildModule {
         ModularRouter(Modular.initialRoute, child: (_, args) => HomePage()),
         ModularRouter(AppRoutes.quiz,
             child: (_, args) => QuizPage(
-                  quizType: args.data as QuizType,
+                  quizType: args.data["type"] as QuizType,
+                  question: args.data["question"] as Question,
                 )),
       ];
 

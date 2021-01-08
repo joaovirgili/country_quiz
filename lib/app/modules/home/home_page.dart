@@ -16,15 +16,20 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   void _onPressedCapital() {
     Modular.to.pushNamed(
       AppRoutes.quiz,
-      arguments: QuizType.capital,
+      arguments: {
+        "type": QuizType.capital,
+        "question": controller.buildBandeiraQuestions(QuizType.capital),
+      },
     );
   }
 
   void _onPressedBandeira() {
-    controller.buildBandeiraQuestions();
     Modular.to.pushNamed(
       AppRoutes.quiz,
-      arguments: QuizType.bandeira,
+      arguments: {
+        "type": QuizType.bandeira,
+        "question": controller.buildBandeiraQuestions(QuizType.bandeira),
+      },
     );
   }
 

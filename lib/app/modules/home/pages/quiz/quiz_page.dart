@@ -1,3 +1,4 @@
+import 'package:country_quiz/app/modules/home/models/question.dart';
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/shared/assets.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,11 @@ import 'quiz_controller.dart';
 
 class QuizPage extends StatefulWidget {
   final QuizType quizType;
+  final Question question;
 
   const QuizPage({
     @required this.quizType,
+    @required this.question,
     Key key,
   }) : super(key: key);
 
@@ -19,6 +22,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends ModularState<QuizPage, QuizController> {
+  final alternativeLetters = ["A", "B", "C", "D"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,31 +57,21 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                         SizedBox(height: 5),
                         QuestionWidget(
                           flagUrl: widget.quizType == QuizType.bandeira
-                              ? "https://restcountries.eu/data/alb.svg"
+                              ? widget.question.correctCountryFlag
                               : null,
-                          statement: "Kuala Lumpur is the capital of",
-                          alternatives: [
-                            QuestionAlternativeModel(
-                              label: "Vietnam",
-                              type: false,
-                              letter: "A",
-                            ),
-                            QuestionAlternativeModel(
-                              label: "Malaysia",
-                              type: true,
-                              letter: "B",
-                            ),
-                            QuestionAlternativeModel(
-                              label: "Sweden",
-                              type: null,
-                              letter: "C",
-                            ),
-                            QuestionAlternativeModel(
-                              label: "Austria",
-                              type: null,
-                              letter: "D",
-                            ),
-                          ],
+                          countryName: widget.quizType == QuizType.capital
+                              ? widget.question.correctCapitalName
+                              : null,
+                          alternatives: alternativeLetters
+                              .map((e) => QuestionAlternativeModel(
+                                    letter: e,
+                                    label: widget
+                                        .question
+                                        .countries[
+                                            alternativeLetters.indexOf(e)]
+                                        .name,
+                                  ))
+                              .toList(),
                         ),
                       ],
                     ),

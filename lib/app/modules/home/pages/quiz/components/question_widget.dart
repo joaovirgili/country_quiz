@@ -20,14 +20,14 @@ class QuestionWidget extends StatelessWidget {
   const QuestionWidget({
     Key key,
     @required this.alternatives,
-    @required this.statement,
+    this.countryName,
     this.onTapNext,
     this.flagUrl,
   }) : super(key: key);
 
   final List<QuestionAlternativeModel> alternatives;
   final Function onTapNext;
-  final String statement;
+  final String countryName;
   final String flagUrl;
 
   @override
@@ -51,7 +51,7 @@ class QuestionWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: SvgPicture.network(
-                    "https://restcountries.eu/data/alb.svg",
+                    flagUrl,
                     height: 55,
                     width: 85,
                   ),
@@ -62,7 +62,7 @@ class QuestionWidget extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 flagUrl == null
-                    ? statement
+                    ? "$countryName is the capital of"
                     : "Which country does this flag belong to?",
                 style: TextStyle(
                   color: Color(0xff2F527B),

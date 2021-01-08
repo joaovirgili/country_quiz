@@ -5,6 +5,9 @@ import 'package:country_quiz/app/domain/repositories/country_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'models/question.dart';
+import 'models/quiz_type_enum.dart';
+
 @Injectable()
 class HomeController {
   final ICountryRepository countryRepository;
@@ -22,16 +25,23 @@ class HomeController {
     isLoading.value = false;
   }
 
-  buildBandeiraQuestions() {
+  Question buildBandeiraQuestions(QuizType type) {
     var randomCountryList = <CountryEntity>[];
+    bool _hasCapital(CountryEntity country) =>
+        type == QuizType.capital ? country.capital != "" : true;
+
+    bool _isAlreadyInList(CountryEntity country) =>
+        randomCountryList.contains(country);
+
     for (var i = 0; i < 4; i++) {
       var randomCountry = _randomCountry();
-      while (randomCountryList.contains(randomCountry)) {
+      while (!_hasCapital(randomCountry) || _isAlreadyInList(randomCountry)) {
         randomCountry = _randomCountry();
       }
       randomCountryList.add(randomCountry);
     }
-    print(randomCountryList);
+
+    return Question(correct: Random().nextInt(3), countries: randomCountryList);
   }
 
   CountryEntity _randomCountry() => countryList[_randomNumber()];
