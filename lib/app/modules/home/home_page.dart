@@ -31,29 +31,37 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             );
           }),
           Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RaisedButton(
-                  onPressed: () {
-                    Modular.to.pushNamed(
-                      AppRoutes.quiz,
-                      arguments: QuizType.capital,
-                    );
-                  },
-                  child: Text("Capital"),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    Modular.to.pushNamed(
-                      AppRoutes.quiz,
-                      arguments: QuizType.bandeira,
-                    );
-                  },
-                  child: Text("Bandeira"),
-                ),
-              ],
-            ),
+            child: ValueListenableBuilder<bool>(
+                valueListenable: controller.isLoading,
+                builder: (context, value, _) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                        onPressed: value
+                            ? null
+                            : () {
+                                Modular.to.pushNamed(
+                                  AppRoutes.quiz,
+                                  arguments: QuizType.capital,
+                                );
+                              },
+                        child: Text("Capital"),
+                      ),
+                      RaisedButton(
+                        onPressed: value
+                            ? null
+                            : () {
+                                Modular.to.pushNamed(
+                                  AppRoutes.quiz,
+                                  arguments: QuizType.bandeira,
+                                );
+                              },
+                        child: Text("Bandeira"),
+                      ),
+                    ],
+                  );
+                }),
           ),
         ],
       ),
