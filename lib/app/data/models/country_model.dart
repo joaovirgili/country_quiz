@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:country_quiz/app/domain/entities/country_entity.dart';
+
 CountryModel countryModelFromJson(String str) =>
     CountryModel.fromJson(json.decode(str));
 
@@ -31,4 +33,10 @@ class CountryModel {
         "name": name == null ? null : name,
         "capital": capital == null ? null : capital,
       };
+
+  CountryEntity toEntity() => CountryEntity(
+        flag: flag,
+        name: name,
+        capital: capital,
+      );
 }
