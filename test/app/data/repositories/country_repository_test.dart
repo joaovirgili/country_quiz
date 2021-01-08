@@ -30,16 +30,20 @@ void main() {
     sut = CountryRepository(dioMock);
   });
 
+  void mockSuccess() => when(dioMock.get(AppUrls.country)).thenAnswer(
+        (realInvocation) async => Response(data: responseMock),
+      );
+
   test('Should call Dio with correct values', () async {
+    mockSuccess();
+
     await sut.fetchCountryList();
 
     verify(dioMock.get(AppUrls.country));
   });
 
   test('Should return a list of CountryEntity if Dio returns 200', () async {
-    when(dioMock.get(AppUrls.country)).thenAnswer(
-      (realInvocation) async => Response(data: responseMock),
-    );
+    mockSuccess();
 
     final res = await sut.fetchCountryList();
 
