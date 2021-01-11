@@ -23,35 +23,38 @@ class QuestionAlternative extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: type == null
-            ? Colors.white
-            : type
-                ? AppColors.green
-                : AppColors.red,
-        border: type == null
-            ? Border.all(color: AppColors.purple.withOpacity(0.7), width: 2)
-            : null,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
-        child: Row(
-          children: [
-            Text(letter, style: style),
-            SizedBox(width: 30),
-            Flexible(
-              child: Text(label, style: style.copyWith(fontSize: 14)),
-            ),
-            if (type != null) ...[
-              Spacer(),
-              Icon(
-                type ? Icons.check_circle_outline : Icons.close,
-                color: Colors.white,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: type == null
+              ? Colors.white
+              : type
+                  ? AppColors.green
+                  : AppColors.red,
+          border: type == null
+              ? Border.all(color: AppColors.purple.withOpacity(0.7), width: 2)
+              : null,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+          child: Row(
+            children: [
+              Text(letter, style: style),
+              SizedBox(width: 30),
+              Flexible(
+                child: Text(label, style: style.copyWith(fontSize: 14)),
               ),
-            ]
-          ],
+              if (type != null) ...[
+                Spacer(),
+                Icon(
+                  type ? Icons.check_circle_outline : Icons.close,
+                  color: Colors.white,
+                ),
+              ]
+            ],
+          ),
         ),
       ),
     );

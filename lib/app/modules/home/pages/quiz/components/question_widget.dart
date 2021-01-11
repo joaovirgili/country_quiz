@@ -25,7 +25,7 @@ class QuestionWidget extends StatelessWidget {
     this.flagUrl,
   }) : super(key: key);
 
-  final List<QuestionAlternativeModel> alternatives;
+  final List<Widget> alternatives;
   final Function onTapNext;
   final String countryName;
   final String flagUrl;
@@ -72,18 +72,20 @@ class QuestionWidget extends StatelessWidget {
               ),
             ),
             SizedBox(height: 24),
-            ...alternatives
-                .map((e) => Column(
-                      children: [
-                        QuestionAlternative(
-                          letter: e.letter,
-                          label: e.label,
-                          type: e.type,
-                        ),
-                        SizedBox(height: 18),
-                      ],
-                    ))
-                .toList(),
+            ...alternatives,
+            // ...alternatives
+            //     .map((e) => Column(
+            //           children: [
+            //             QuestionAlternative(
+            //               letter: e.letter,
+            //               label: e.label,
+            //               type: e.type,
+            //               onTap: () => onTapAlternative(e),
+            //             ),
+            //             SizedBox(height: 18),
+            //           ],
+            //         ))
+            //     .toList(),
             CustomButton(onTap: onTapNext),
           ],
         ),

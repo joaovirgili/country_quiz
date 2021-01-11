@@ -4,6 +4,7 @@ import 'package:country_quiz/shared/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'components/question_alternative_widget.dart';
 import 'components/question_widget.dart';
 import 'quiz_controller.dart';
 
@@ -22,7 +23,11 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends ModularState<QuizPage, QuizController> {
-  final alternativeLetters = ["A", "B", "C", "D"];
+  @override
+  void initState() {
+    controller.setAlternativeModels(widget.question.countries);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +44,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Container(
-                height: widget.quizType == QuizType.bandeira ? 600 : 500,
+                height: widget.quizType == QuizType.bandeira ? 600 : 550,
                 child: Stack(
                   children: [
                     Column(
@@ -62,14 +67,17 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                           countryName: widget.quizType == QuizType.capital
                               ? widget.question.correctCapitalName
                               : null,
-                          alternatives: alternativeLetters
-                              .map((e) => QuestionAlternativeModel(
-                                    letter: e,
-                                    label: widget
-                                        .question
-                                        .countries[
-                                            alternativeLetters.indexOf(e)]
-                                        .name,
+                          alternatives: controller.alternatives
+                              .map((e) => Column(
+                                    children: [
+                                      QuestionAlternative(
+                                        letter: e.letter,
+                                        label: e.label,
+                                        onTap: () =>
+                                            controller.selectAlertnative(e),
+                                      ),
+                                      SizedBox(height: 18),
+                                    ],
                                   ))
                               .toList(),
                         ),
