@@ -18,7 +18,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       AppRoutes.quiz,
       arguments: {
         "type": QuizType.capital,
-        "question": controller.buildBandeiraQuestions(QuizType.capital),
+        "question": controller.buildQuestion(QuizType.capital),
       },
     );
   }
@@ -28,7 +28,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       AppRoutes.quiz,
       arguments: {
         "type": QuizType.bandeira,
-        "question": controller.buildBandeiraQuestions(QuizType.bandeira),
+        "question": controller.buildQuestion(QuizType.bandeira),
       },
     );
   }

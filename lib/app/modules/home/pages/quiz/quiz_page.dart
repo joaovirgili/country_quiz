@@ -1,6 +1,7 @@
 import 'package:country_quiz/app/modules/home/models/question.dart';
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/shared/assets.dart';
+import 'package:country_quiz/shared/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
@@ -71,6 +72,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                         QuestionWidget(
                           flagUrl: flagUrl,
                           countryName: countryName,
+                          onTapNext: onTapNext,
                           alternatives: controller.alternatives
                               .map(_alternativeFromModelToWidget)
                               .toList(),
@@ -89,6 +91,13 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
         ],
       ),
     );
+  }
+
+  void onTapNext() {
+    Modular.to.pushNamed(AppRoutes.quiz, arguments: {
+      "type": widget.quizType,
+      "question": controller.buildQuestion(widget.quizType)
+    });
   }
 
   AlternativeState getAlternativeType(QuestionAlternativeModel e) {

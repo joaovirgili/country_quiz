@@ -9,8 +9,8 @@ import 'package:country_quiz/app/modules/home/home_module.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
-        BindInject((i) => AppController(), singleton: true, lazy: true),
-        BindInject((i) => Dio(), singleton: true, lazy: true),
+        BindInject((i) => AppController()),
+        BindInject((i) => Dio()),
       ];
 
   @override

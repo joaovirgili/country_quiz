@@ -2,8 +2,8 @@ import 'package:country_quiz/app/data/repositories/country_repository.dart';
 import 'package:country_quiz/app/domain/repositories/country_repository.dart';
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/app/modules/home/pages/quiz/quiz_page.dart';
+import 'package:country_quiz/app/modules/home/stores/quiz_store.dart';
 import 'package:country_quiz/shared/routes.dart';
-import 'package:dio/dio.dart';
 
 import 'models/question.dart';
 import 'pages/quiz/quiz_controller.dart';
@@ -16,11 +16,12 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         BindInject<ICountryRepository>(
-          (i) => CountryRepository(i.get<Dio>()),
+          (i) => CountryRepository(i.get()),
         ),
-        BindInject<QuizController>((i) => QuizController()),
+        BindInject<QuizStore>((i) => QuizStore()),
+        BindInject<QuizController>((i) => QuizController(i.get())),
         BindInject<HomeController>(
-          (i) => HomeController(i.get<ICountryRepository>()),
+          (i) => HomeController(i.get(), i.get()),
         ),
       ];
 
