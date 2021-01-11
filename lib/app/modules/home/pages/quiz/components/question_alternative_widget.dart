@@ -5,12 +5,14 @@ class QuestionAlternative extends StatelessWidget {
   final String letter;
   final String label;
   final bool type;
+  final Function() onTap;
 
   const QuestionAlternative({
     Key key,
     @required this.letter,
     @required this.label,
     this.type,
+    this.onTap,
   }) : super(key: key);
 
   TextStyle get style => TextStyle(
@@ -39,13 +41,16 @@ class QuestionAlternative extends StatelessWidget {
           children: [
             Text(letter, style: style),
             SizedBox(width: 30),
-            Text(label, style: style.copyWith(fontSize: 14)),
-            Spacer(),
-            if (type != null)
+            Flexible(
+              child: Text(label, style: style.copyWith(fontSize: 14)),
+            ),
+            if (type != null) ...[
+              Spacer(),
               Icon(
                 type ? Icons.check_circle_outline : Icons.close,
                 color: Colors.white,
               ),
+            ]
           ],
         ),
       ),
