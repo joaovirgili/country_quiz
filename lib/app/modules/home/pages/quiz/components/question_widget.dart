@@ -1,10 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'custom_button_widget.dart';
-import 'question_alternative_widget.dart';
 
-class QuestionAlternativeModel {
+class QuestionAlternativeModel extends Equatable {
   final String letter;
   final String label;
   final bool type;
@@ -14,6 +14,9 @@ class QuestionAlternativeModel {
     @required this.label,
     this.type,
   });
+
+  @override
+  List<Object> get props => [letter];
 }
 
 class QuestionWidget extends StatelessWidget {
@@ -73,19 +76,6 @@ class QuestionWidget extends StatelessWidget {
             ),
             SizedBox(height: 24),
             ...alternatives,
-            // ...alternatives
-            //     .map((e) => Column(
-            //           children: [
-            //             QuestionAlternative(
-            //               letter: e.letter,
-            //               label: e.label,
-            //               type: e.type,
-            //               onTap: () => onTapAlternative(e),
-            //             ),
-            //             SizedBox(height: 18),
-            //           ],
-            //         ))
-            //     .toList(),
             CustomButton(onTap: onTapNext),
           ],
         ),

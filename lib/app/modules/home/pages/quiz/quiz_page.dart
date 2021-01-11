@@ -29,6 +29,14 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
     super.initState();
   }
 
+  String get flagUrl => widget.quizType == QuizType.bandeira
+      ? widget.question.correctCountryFlag
+      : null;
+
+  String get countryName => widget.quizType == QuizType.capital
+      ? widget.question.correctCapitalName
+      : null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,34 +69,17 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                         ),
                         SizedBox(height: 5),
                         QuestionWidget(
-                          flagUrl: widget.quizType == QuizType.bandeira
-                              ? widget.question.correctCountryFlag
-                              : null,
-                          countryName: widget.quizType == QuizType.capital
-                              ? widget.question.correctCapitalName
-                              : null,
+                          flagUrl: flagUrl,
+                          countryName: countryName,
                           alternatives: controller.alternatives
-                              .map((e) => Column(
-                                    children: [
-                                      QuestionAlternative(
-                                        letter: e.letter,
-                                        label: e.label,
-                                        onTap: () =>
-                                            controller.selectAlertnative(e),
-                                      ),
-                                      SizedBox(height: 18),
-                                    ],
-                                  ))
+                              .map(_alternativeFromModelToWidget)
                               .toList(),
                         ),
                       ],
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: SvgPicture.asset(
-                        AppAssets.question,
-                        height: 100,
-                      ),
+                      child: SvgPicture.asset(AppAssets.question, height: 100),
                     ),
                   ],
                 ),
@@ -99,4 +90,26 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
       ),
     );
   }
+
+  AlternativeState getAlternativeType(QuestionAlternativeModel e) {
+    return controller.selectedAlternative.value == e
+        ? AlternativeState.selected
+        : AlternativeState.unselected;
+  }
+
+  Widget _alternativeFromModelToWidget(QuestionAlternativeModel e) => Column(
+        children: [
+          ValueListenableBuilder<QuestionAlternativeModel>(
+              valueListenable: controller.selectedAlternative,
+              builder: (context, snapshot, child) {
+                return QuestionAlternative(
+                  letter: e.letter,
+                  label: e.label,
+                  onTap: () => controller.selectAlertnative(e),
+                  state: getAlternativeType(e),
+                );
+              }),
+          SizedBox(height: 18),
+        ],
+      );
 }
