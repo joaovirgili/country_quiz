@@ -19,7 +19,10 @@ class HomeModule extends ChildModule {
           (i) => CountryRepository(i.get()),
         ),
         BindInject<QuizStore>((i) => QuizStore()),
-        BindInject<QuizController>((i) => QuizController(i.get())),
+        BindInject<QuizController>(
+          (i) => QuizController(i.get()),
+          singleton: false,
+        ),
         BindInject<HomeController>(
           (i) => HomeController(i.get(), i.get()),
         ),
