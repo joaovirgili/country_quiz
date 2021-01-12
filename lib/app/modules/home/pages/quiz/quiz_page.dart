@@ -5,6 +5,7 @@ import 'package:country_quiz/shared/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 import 'components/question_alternative_widget.dart';
 import 'components/question_widget.dart';
 import 'quiz_controller.dart';
@@ -69,14 +70,16 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                           ),
                         ),
                         SizedBox(height: 5),
-                        QuestionWidget(
-                          flagUrl: flagUrl,
-                          countryName: countryName,
-                          onTapNext: onTapNext,
-                          alternatives: controller.alternatives
-                              .map(_alternativeFromModelToWidget)
-                              .toList(),
-                        ),
+                        RxBuilder(builder: (_) {
+                          return QuestionWidget(
+                            flagUrl: flagUrl,
+                            countryName: countryName,
+                            onTapNext: controller.canGoNext ? onTapNext : null,
+                            alternatives: controller.alternatives
+                                .map(_alternativeFromModelToWidget)
+                                .toList(),
+                          );
+                        }),
                       ],
                     ),
                     Align(

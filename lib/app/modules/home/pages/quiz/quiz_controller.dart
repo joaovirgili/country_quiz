@@ -9,10 +9,11 @@ import './components/question_widget.dart';
 class QuizController {
   final QuizStore quizStore;
   final selectedAlternative = ValueNotifier<QuestionAlternativeModel>(null);
-
   final alternativeLetters = ["A", "B", "C", "D"];
 
   List<QuestionAlternativeModel> alternatives;
+
+  bool get canGoNext => quizStore.canGoNext;
 
   QuizController(this.quizStore);
 
@@ -27,6 +28,7 @@ class QuizController {
 
   void selectAlertnative(QuestionAlternativeModel alternative) {
     selectedAlternative.value = alternative;
+    quizStore.addAlternative(alternative);
   }
 
   Question buildQuestion(QuizType type) => quizStore.buildQuestion(type);
