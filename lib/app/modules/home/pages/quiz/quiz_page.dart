@@ -104,7 +104,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
         "question": controller.buildQuestion(widget.quizType)
       });
     } else {
-      // TODO: Navigate to Results page
+      Modular.to.popAndPushNamed(AppRoutes.results);
     }
   }
 

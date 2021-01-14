@@ -1,3 +1,6 @@
+import 'package:country_quiz/app/modules/home/pages/results/results_page.dart';
+
+import 'pages/results/results_controller.dart';
 import 'package:country_quiz/app/data/repositories/country_repository.dart';
 import 'package:country_quiz/app/domain/repositories/country_repository.dart';
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
@@ -15,6 +18,7 @@ import 'home_page.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
+        BindInject((i) => ResultsController()),
         BindInject<ICountryRepository>(
           (i) => CountryRepository(i.get()),
         ),
@@ -31,11 +35,17 @@ class HomeModule extends ChildModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(Modular.initialRoute, child: (_, args) => HomePage()),
-        ModularRouter(AppRoutes.quiz,
-            child: (_, args) => QuizPage(
-                  quizType: args.data["type"] as QuizType,
-                  question: args.data["question"] as Question,
-                )),
+        ModularRouter(
+          AppRoutes.quiz,
+          child: (_, args) => QuizPage(
+            quizType: args.data["type"] as QuizType,
+            question: args.data["question"] as Question,
+          ),
+        ),
+        ModularRouter(
+          AppRoutes.results,
+          child: (_, args) => ResultsPage(),
+        ),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
