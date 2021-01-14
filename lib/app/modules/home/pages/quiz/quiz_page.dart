@@ -97,11 +97,15 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   }
 
   void onTapNext() {
-    controller.saveAlternative();
-    Modular.to.popAndPushNamed(AppRoutes.quiz, arguments: {
-      "type": widget.quizType,
-      "question": controller.buildQuestion(widget.quizType)
-    });
+    final isCorrect = controller.next(widget.question.correct);
+    if (isCorrect) {
+      Modular.to.popAndPushNamed(AppRoutes.quiz, arguments: {
+        "type": widget.quizType,
+        "question": controller.buildQuestion(widget.quizType)
+      });
+    } else {
+      // TODO: Navigate to Results page
+    }
   }
 
   AlternativeState getAlternativeType(QuestionAlternativeModel e) {

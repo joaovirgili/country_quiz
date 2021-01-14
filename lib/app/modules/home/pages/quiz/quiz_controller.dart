@@ -36,5 +36,14 @@ class QuizController {
     quizStore.addAlternative(_selectedAlternative.value);
   }
 
+  bool next(int correctAlternativeIndex) {
+    if (alternativeLetters[correctAlternativeIndex] ==
+        selectedAlternative.letter) {
+      saveAlternative();
+      return true;
+    }
+    return false;
+  }
+
   Question buildQuestion(QuizType type) => quizStore.buildQuestion(type);
 }
