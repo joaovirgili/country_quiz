@@ -98,7 +98,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
 
   void onTapNext() {
     controller.saveAlternative();
-    Modular.to.pushNamed(AppRoutes.quiz, arguments: {
+    Modular.to.popAndPushNamed(AppRoutes.quiz, arguments: {
       "type": widget.quizType,
       "question": controller.buildQuestion(widget.quizType)
     });
