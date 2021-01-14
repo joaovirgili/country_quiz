@@ -27,8 +27,8 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends ModularState<QuizPage, QuizController> {
   @override
   void initState() {
-    controller.setAlternativeModels(widget.question.countries);
     super.initState();
+    controller.setAlternativeModels(widget.question.countries);
   }
 
   String get flagUrl => widget.quizType == QuizType.bandeira
@@ -97,6 +97,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   }
 
   void onTapNext() {
+    controller.saveAlternative();
     Modular.to.pushNamed(AppRoutes.quiz, arguments: {
       "type": widget.quizType,
       "question": controller.buildQuestion(widget.quizType)
@@ -104,23 +105,21 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   }
 
   AlternativeState getAlternativeType(QuestionAlternativeModel e) {
-    return controller.selectedAlternative.value == e
+    return controller.selectedAlternative == e
         ? AlternativeState.selected
         : AlternativeState.unselected;
   }
 
   Widget _alternativeFromModelToWidget(QuestionAlternativeModel e) => Column(
         children: [
-          ValueListenableBuilder<QuestionAlternativeModel>(
-              valueListenable: controller.selectedAlternative,
-              builder: (context, snapshot, child) {
-                return QuestionAlternative(
-                  letter: e.letter,
-                  label: e.label,
-                  onTap: () => controller.selectAlertnative(e),
-                  state: getAlternativeType(e),
-                );
-              }),
+          RxBuilder(builder: (_) {
+            return QuestionAlternative(
+              letter: e.letter,
+              label: e.label,
+              onTap: () => controller.selectAlertnative(e),
+              state: getAlternativeType(e),
+            );
+          }),
           SizedBox(height: 18),
         ],
       );

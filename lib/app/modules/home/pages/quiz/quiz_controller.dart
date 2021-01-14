@@ -2,18 +2,20 @@ import 'package:country_quiz/app/domain/entities/country_entity.dart';
 import 'package:country_quiz/app/modules/home/models/question.dart';
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/app/modules/home/stores/quiz_store.dart';
-import 'package:flutter/material.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 
 import './components/question_widget.dart';
 
 class QuizController {
   final QuizStore quizStore;
-  final selectedAlternative = ValueNotifier<QuestionAlternativeModel>(null);
+  final _selectedAlternative = RxNotifier<QuestionAlternativeModel>(null);
   final alternativeLetters = ["A", "B", "C", "D"];
 
   List<QuestionAlternativeModel> alternatives;
 
-  bool get canGoNext => quizStore.canGoNext;
+  bool get canGoNext => _selectedAlternative.value != null;
+  QuestionAlternativeModel get selectedAlternative =>
+      _selectedAlternative.value;
 
   QuizController(this.quizStore);
 
@@ -27,8 +29,11 @@ class QuizController {
   }
 
   void selectAlertnative(QuestionAlternativeModel alternative) {
-    selectedAlternative.value = alternative;
-    quizStore.addAlternative(alternative);
+    _selectedAlternative.value = alternative;
+  }
+
+  void saveAlternative() {
+    quizStore.addAlternative(_selectedAlternative.value);
   }
 
   Question buildQuestion(QuizType type) => quizStore.buildQuestion(type);

@@ -13,8 +13,6 @@ class QuizStore {
 
   List<CountryEntity> countryList;
 
-  bool get canGoNext => _questionsCount.value == _selectedAlternatives.length;
-
   int get questionsCount => _questionsCount.value;
 
   List<QuestionAlternativeModel> get selectedAlternatives =>
