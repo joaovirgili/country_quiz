@@ -6,8 +6,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class QuizResultWidget extends StatelessWidget {
   final void Function() onTapTryAgain;
+  final int correctAnswersLength;
 
-  const QuizResultWidget({Key key, this.onTapTryAgain}) : super(key: key);
+  const QuizResultWidget({
+    @required this.correctAnswersLength,
+    Key key,
+    this.onTapTryAgain,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +59,7 @@ class QuizResultWidget extends StatelessWidget {
                 text: "You got ",
                 children: [
                   TextSpan(
-                    text: "4",
+                    text: "$correctAnswersLength",
                     style: TextStyle(
                       color: AppColors.green,
                       fontWeight: FontWeight.w800,

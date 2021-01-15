@@ -14,6 +14,7 @@ class QuizController {
   List<QuestionAlternativeModel> alternatives;
 
   bool get canGoNext => _selectedAlternative.value != null;
+  int get correctAnswersLength => quizStore.correctAnswersLength;
   QuestionAlternativeModel get selectedAlternative =>
       _selectedAlternative.value;
 

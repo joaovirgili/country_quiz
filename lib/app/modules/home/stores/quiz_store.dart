@@ -14,6 +14,7 @@ class QuizStore {
   List<CountryEntity> countryList;
 
   int get questionsCount => _questionsCount.value;
+  int get correctAnswersLength => _selectedAlternatives.length;
 
   List<QuestionAlternativeModel> get selectedAlternatives =>
       _selectedAlternatives;
@@ -45,4 +46,9 @@ class QuizStore {
   _randomNumber() => Random().nextInt(countryList.length - 1);
 
   _incrementQuestionsCount() => _questionsCount.value++;
+
+  void clear() {
+    selectedAlternatives.clear();
+    _questionsCount.value = 0;
+  }
 }

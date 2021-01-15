@@ -18,7 +18,7 @@ import 'home_page.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        BindInject((i) => ResultsController()),
+        BindInject((i) => ResultsController(i.get())),
         BindInject<ICountryRepository>(
           (i) => CountryRepository(i.get()),
         ),
@@ -44,7 +44,7 @@ class HomeModule extends ChildModule {
         ),
         ModularRouter(
           AppRoutes.results,
-          child: (_, args) => ResultsPage(),
+          child: (_, args) => ResultsPage(correctAnswersLength: args.data),
         ),
       ];
 

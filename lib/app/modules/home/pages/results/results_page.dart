@@ -6,8 +6,12 @@ import 'components/quiz_result_widget.dart';
 import 'results_controller.dart';
 
 class ResultsPage extends StatefulWidget {
-  final String title;
-  const ResultsPage({Key key, this.title = "Results"}) : super(key: key);
+  final int correctAnswersLength;
+
+  const ResultsPage({
+    Key key,
+    @required this.correctAnswersLength,
+  }) : super(key: key);
 
   @override
   _ResultsPageState createState() => _ResultsPageState();
@@ -44,7 +48,8 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
                   ),
                   const SizedBox(height: 10),
                   QuizResultWidget(
-                    onTapTryAgain: () {},
+                    onTapTryAgain: _tryAgain,
+                    correctAnswersLength: widget.correctAnswersLength,
                   ),
                 ],
               ),
@@ -53,5 +58,10 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
         ],
       ),
     );
+  }
+
+  void _tryAgain() {
+    controller.clearQuiz();
+    Modular.to.pop();
   }
 }
