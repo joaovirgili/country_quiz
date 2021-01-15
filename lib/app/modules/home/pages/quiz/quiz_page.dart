@@ -1,6 +1,7 @@
 import 'package:country_quiz/app/modules/home/models/question.dart';
 import 'package:country_quiz/app/modules/home/models/quiz_type_enum.dart';
 import 'package:country_quiz/shared/assets.dart';
+import 'package:country_quiz/shared/colors.dart';
 import 'package:country_quiz/shared/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -64,7 +65,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                         Text(
                           "COUNTRY QUIZ",
                           style: TextStyle(
-                            color: Color(0xffF2F2F2),
+                            color: AppColors.white,
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
                           ),

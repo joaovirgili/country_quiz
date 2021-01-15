@@ -39,6 +39,13 @@ class QuestionWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(2, 2),
+            blurRadius: 10,
+            color: Colors.black.withOpacity(0.5),
+          ),
+        ],
       ),
       width: double.maxFinite,
       child: Padding(

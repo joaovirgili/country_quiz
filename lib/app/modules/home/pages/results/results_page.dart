@@ -1,5 +1,8 @@
+import 'package:country_quiz/shared/assets.dart';
+import 'package:country_quiz/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'components/quiz_result_widget.dart';
 import 'results_controller.dart';
 
 class ResultsPage extends StatefulWidget {
@@ -16,11 +19,38 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[],
+      body: Stack(
+        children: <Widget>[
+          LayoutBuilder(builder: (context, constraints) {
+            return SizedBox(
+              height: constraints.maxHeight,
+              child: Image.asset(AppAssets.background, fit: BoxFit.cover),
+            );
+          }),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "COUNTRY QUIZ",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  QuizResultWidget(
+                    onTapTryAgain: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
