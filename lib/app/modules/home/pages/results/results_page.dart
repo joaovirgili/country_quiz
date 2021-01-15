@@ -28,7 +28,11 @@ class _ResultsPageState extends ModularState<ResultsPage, ResultsController> {
           LayoutBuilder(builder: (context, constraints) {
             return SizedBox(
               height: constraints.maxHeight,
-              child: Image.asset(AppAssets.background, fit: BoxFit.cover),
+              width: constraints.maxWidth,
+              child: Image.asset(
+                AppAssets.background,
+                fit: BoxFit.cover,
+              ),
             );
           }),
           Padding(

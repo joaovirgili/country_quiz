@@ -44,6 +44,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
           LayoutBuilder(builder: (context, constraints) {
             return SizedBox(
               height: constraints.maxHeight,
+              width: constraints.maxWidth,
               child: Image.asset(
                 AppAssets.background,
                 fit: BoxFit.cover,
