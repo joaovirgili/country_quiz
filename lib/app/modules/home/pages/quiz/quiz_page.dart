@@ -83,7 +83,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                             alternatives: controller.alternatives
                                 .map(_alternativeFromModelToWidget)
                                 .toList(),
-                            onTimeFinished: finishQuiz,
+                            onTimeFinished: onTapNext,
                           );
                         }),
                       ],
@@ -103,8 +103,10 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   }
 
   void onTapNext() {
-    final isCorrect = controller.next(widget.question.correct);
-    isCorrect ? goToNextQuestion() : finishQuiz();
+    if (!controller.alreadyAnswered) {
+      final isCorrect = controller.next(widget.question.correct);
+      isCorrect ? goToNextQuestion() : finishQuiz();
+    }
   }
 
   void goToNextQuestion() {

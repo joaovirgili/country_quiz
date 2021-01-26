@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:country_quiz/shared/colors.dart';
+import 'package:country_quiz/shared/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -73,7 +74,9 @@ class QuestionWidget extends StatelessWidget {
                 ),
               ),
             SizedBox(height: 24),
-            QuestionTimerWidget(limitTime: 20, onFinish: onTimeFinished),
+            QuestionTimerWidget(
+                limitTime: AppConstants.quizLimitTime,
+                onFinish: onTimeFinished),
             SizedBox(height: 12),
             Align(
               alignment: Alignment.centerLeft,

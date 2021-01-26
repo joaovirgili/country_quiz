@@ -10,6 +10,7 @@ class QuizController {
   final QuizStore quizStore;
   final _selectedAlternative = RxNotifier<QuestionAlternativeModel>(null);
   final alternativeLetters = ["A", "B", "C", "D"];
+  var alreadyAnswered = false;
 
   List<QuestionAlternativeModel> alternatives;
 
@@ -38,8 +39,10 @@ class QuizController {
   }
 
   bool next(int correctAlternativeIndex) {
-    if (alternativeLetters[correctAlternativeIndex] ==
-        selectedAlternative.letter) {
+    alreadyAnswered = true;
+    if (selectedAlternative != null &&
+        alternativeLetters[correctAlternativeIndex] ==
+            selectedAlternative.letter) {
       saveAlternative();
       return true;
     }
