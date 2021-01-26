@@ -5,14 +5,16 @@ class CountryEntity implements Equatable {
     this.flag,
     this.name,
     this.capital,
+    this.code,
   });
 
   final String flag;
   final String name;
   final String capital;
+  final String code;
 
   @override
-  List<Object> get props => [flag, name, capital];
+  List<Object> get props => [code];
 
   @override
   bool get stringify => throw UnimplementedError();

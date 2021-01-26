@@ -29,14 +29,14 @@ class QuestionWidget extends StatelessWidget {
     @required this.alternatives,
     this.countryName,
     this.onTapNext,
-    this.flagUrl,
+    this.countryCode,
     this.onTimeFinished,
   }) : super(key: key);
 
   final List<Widget> alternatives;
   final Function onTapNext;
   final String countryName;
-  final String flagUrl;
+  final String countryCode;
   final Function onTimeFinished;
 
   @override
@@ -61,13 +61,16 @@ class QuestionWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             SizedBox(height: 48),
-            if (flagUrl != null)
+            if (countryCode != null)
               Align(
                 alignment: Alignment.topLeft,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: SvgPicture.network(
-                    flagUrl,
+                  child: Image.network(
+                    "https://flagcdn.com/h240/{code}.png".replaceAll(
+                      "{code}",
+                      countryCode,
+                    ),
                     height: 55,
                     width: 85,
                   ),
@@ -81,7 +84,7 @@ class QuestionWidget extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                flagUrl == null
+                countryCode == null
                     ? "$countryName is the capital of"
                     : "Which country does this flag belong to?",
                 style: TextStyle(

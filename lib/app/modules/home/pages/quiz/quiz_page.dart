@@ -33,7 +33,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
   }
 
   String get flagUrl => widget.quizType == QuizType.bandeira
-      ? widget.question.correctCountryFlag
+      ? widget.question.correctCountryCode
       : null;
 
   String get countryName => widget.quizType == QuizType.capital
@@ -77,7 +77,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                         SizedBox(height: 5),
                         RxBuilder(builder: (_) {
                           return QuestionWidget(
-                            flagUrl: flagUrl,
+                            countryCode: flagUrl,
                             countryName: countryName,
                             onTapNext: controller.canGoNext ? onTapNext : null,
                             alternatives: controller.alternatives
