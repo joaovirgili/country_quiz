@@ -59,7 +59,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Container(
-                height: widget.quizType == QuizType.bandeira ? 600 : 550,
+                height: widget.quizType == QuizType.bandeira ? 650 : 600,
                 child: Stack(
                   children: [
                     Column(
