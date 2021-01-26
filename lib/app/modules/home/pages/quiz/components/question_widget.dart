@@ -29,12 +29,14 @@ class QuestionWidget extends StatelessWidget {
     this.countryName,
     this.onTapNext,
     this.flagUrl,
+    this.onTimeFinished,
   }) : super(key: key);
 
   final List<Widget> alternatives;
   final Function onTapNext;
   final String countryName;
   final String flagUrl;
+  final Function onTimeFinished;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +73,7 @@ class QuestionWidget extends StatelessWidget {
                 ),
               ),
             SizedBox(height: 24),
-            QuestionTimerWidget(
-              limitTime: 20,
-              onFinish: () {
-                print("tempo acabou");
-              },
-            ),
+            QuestionTimerWidget(limitTime: 20, onFinish: onTimeFinished),
             SizedBox(height: 12),
             Align(
               alignment: Alignment.centerLeft,

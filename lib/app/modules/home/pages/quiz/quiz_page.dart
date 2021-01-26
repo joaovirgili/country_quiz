@@ -83,6 +83,7 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
                             alternatives: controller.alternatives
                                 .map(_alternativeFromModelToWidget)
                                 .toList(),
+                            onTimeFinished: finishQuiz,
                           );
                         }),
                       ],
@@ -103,17 +104,21 @@ class _QuizPageState extends ModularState<QuizPage, QuizController> {
 
   void onTapNext() {
     final isCorrect = controller.next(widget.question.correct);
-    if (isCorrect) {
-      Modular.to.popAndPushNamed(AppRoutes.quiz, arguments: {
-        "type": widget.quizType,
-        "question": controller.buildQuestion(widget.quizType)
-      });
-    } else {
-      Modular.to.popAndPushNamed(
-        AppRoutes.results,
-        arguments: controller.correctAnswersLength,
-      );
-    }
+    isCorrect ? goToNextQuestion() : finishQuiz();
+  }
+
+  void goToNextQuestion() {
+    Modular.to.popAndPushNamed(AppRoutes.quiz, arguments: {
+      "type": widget.quizType,
+      "question": controller.buildQuestion(widget.quizType)
+    });
+  }
+
+  void finishQuiz() {
+    Modular.to.popAndPushNamed(
+      AppRoutes.results,
+      arguments: controller.correctAnswersLength,
+    );
   }
 
   AlternativeState getAlternativeType(QuestionAlternativeModel e) {
