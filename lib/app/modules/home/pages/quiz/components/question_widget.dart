@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:country_quiz/shared/colors.dart';
 import 'package:country_quiz/shared/constants.dart';
+import 'package:country_quiz/shared/urls.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -63,33 +64,14 @@ class QuestionWidget extends StatelessWidget {
             SizedBox(height: 48),
             if (countryCode != null)
               Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                      offset: Offset(2, 2),
-                      blurRadius: 10,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ]),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: CachedNetworkImage(
-                      height: 55,
-                      width: 85,
-                      imageUrl:
-                          "https://flagcdn.com/h240/{code}.png".replaceAll(
-                        "{code}",
-                        countryCode,
-                      ),
-                    ),
-                  ),
-                ),
+                alignment: Alignment.centerLeft,
+                child: FlagImage(countryCode: countryCode),
               ),
             SizedBox(height: 24),
             QuestionTimerWidget(
-                limitTime: AppConstants.quizLimitTime,
-                onFinish: onTimeFinished),
+              limitTime: AppConstants.quizLimitTime,
+              onFinish: onTimeFinished,
+            ),
             SizedBox(height: 12),
             Align(
               alignment: Alignment.centerLeft,
@@ -110,6 +92,50 @@ class QuestionWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class FlagImage extends StatelessWidget {
+  const FlagImage({
+    Key key,
+    @required this.countryCode,
+  }) : super(key: key);
+
+  final String countryCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return CachedNetworkImage(
+      imageUrl: AppUrls.countryFlagImage.replaceAll("{code}", countryCode),
+      placeholder: (context, _) => _buildLoading(),
+      imageBuilder: (context, provider) => Container(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: Image(
+            image: provider,
+            height: 80,
+            fit: BoxFit.fitHeight,
+          ),
+        ),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(2, 2),
+              blurRadius: 10,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox _buildLoading() {
+    return SizedBox(
+      height: 80,
+      width: 120,
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }
