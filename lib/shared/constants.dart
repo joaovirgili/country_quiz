@@ -1,3 +1,3 @@
 class AppConstants {
-  static const quizLimitTime = 15;
+  static const quizLimitTime = 20;
 }
