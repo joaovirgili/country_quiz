@@ -64,14 +64,24 @@ class QuestionWidget extends StatelessWidget {
             if (countryCode != null)
               Align(
                 alignment: Alignment.topLeft,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: CachedNetworkImage(
-                    height: 55,
-                    width: 85,
-                    imageUrl: "https://flagcdn.com/h240/{code}.png".replaceAll(
-                      "{code}",
-                      countryCode,
+                child: Container(
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      offset: Offset(2, 2),
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.5),
+                    ),
+                  ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: CachedNetworkImage(
+                      height: 55,
+                      width: 85,
+                      imageUrl:
+                          "https://flagcdn.com/h240/{code}.png".replaceAll(
+                        "{code}",
+                        countryCode,
+                      ),
                     ),
                   ),
                 ),
