@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  cached_network_image: ^2.5.0
   equatable: ^1.2.5
   rx_notifier: ^0.0.8
   flutter_svg: ^0.19.2+1

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:country_quiz/shared/colors.dart';
 import 'package:country_quiz/shared/constants.dart';
 import 'package:equatable/equatable.dart';
@@ -66,13 +67,13 @@ class QuestionWidget extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: Image.network(
-                    "https://flagcdn.com/h240/{code}.png".replaceAll(
+                  child: CachedNetworkImage(
+                    height: 55,
+                    width: 85,
+                    imageUrl: "https://flagcdn.com/h240/{code}.png".replaceAll(
                       "{code}",
                       countryCode,
                     ),
-                    height: 55,
-                    width: 85,
                   ),
                 ),
               ),
