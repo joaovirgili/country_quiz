@@ -58,11 +58,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: value ? null : _onPressedCapital,
                         child: Text("Capital"),
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: value ? null : _onPressedBandeira,
                         child: Text("Bandeira"),
                       ),

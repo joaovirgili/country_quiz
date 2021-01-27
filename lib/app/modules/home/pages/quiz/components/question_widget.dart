@@ -5,7 +5,6 @@ import 'package:country_quiz/shared/colors.dart';
 import 'package:country_quiz/shared/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'custom_button_widget.dart';
 
